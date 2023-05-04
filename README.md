@@ -23,8 +23,15 @@
 - The custom user class is located in BlazorServerTemplate.Data and is titled BlazorUser. It includes additional fields such as Age and Address, which are both optional. When you register as a new user, you are prompted to enter your age. This is something else that you should customize as per the requirements of your app.
 - BlazorServerTemplate.Shared contains the NavMenu.razor file, which is how the sidebar links are rendered.
 - To find the files for the pages themselves, look in the BlazorServerTemplate.Pages folder.
-- You can visit http://localhost:<portnumber>/swagger/index.html to access swagger for your APIs.
--
+- You can visit "/swagger" to access swagger for your APIs.
+- "/counter" will show you how to use reactive elements and variables
+- "child-layout-example" will show you how to use child elements and conditionally rendered outlets
+    - Page 1 will show you how to use for loops in HTML
+    - Page 2 will show you how to fetch data from the database and render it in a table, along with edit and delete functionalities.
+    - Page 3 will allow you to POST data to the database.
+- "/upload-to-blob-storage" shows you a demo of how you can upload files to blob storage. Of course, you will need to supply it with your own blob storage connection string.
+- Speaking of which, to change database providers from SqlLite to use SqlServer, just provide the connection string in appsettings.json and uncomment the lines from Program.cs
+- "/manage-roles" shows you how to have role-based authorization. You can create, assign and delete roles from here. "/fetchdata" has an example of this in action.
 
 Here are setup instructions for login providers:
 
