@@ -1,0 +1,24 @@
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+@using BlazorServerTemplate.Data.Models
+
+<h3>Page 3</h3>
+
+<form>
+    <input class="form-control" placeholder="Year" @bind="c.Year" />
+    <input class="form-control" placeholder="Make" @bind="c.Manufacturer" />
+    <input class="form-control" placeholder="Model Name" @bind="c.Name" />
+    <input class="form-control" placeholder="Color" @bind="c.Color" />
+    <input class="form-control" placeholder="Mileage" @bind="c.Mileage" />
+    <br />
+    <button type="submit" class="btn btn-success" @onclick="Add">Add</button>
+</form>
+
+@code {
+    [Parameter] public Car c { get; set; } = new Car();
+
+    protected async Task Add()
+    {
+        var response = await HttpClient.PostAsJsonAsync(NavigationManager.BaseUri + "api/v1/cars", c);
+    }
+}

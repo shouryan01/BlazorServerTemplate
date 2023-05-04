@@ -1,0 +1,76 @@
+@page "/upload-to-blob-storage"
+@using Azure.Storage.Blobs
+@using Azure.Storage.Blobs.Models
+
+    <h1>Upload File to Blob</h1>
+    <InputFile OnChange="@UploadFiles" multiple />
+
+    <br /><br /><br />
+    <h2>Existing Files in Blob:</h2>
+    @if (blobs != null && blobs.Any())
+    {
+        <ul>
+            @foreach (var blob in blobs)
+            {
+                <li>
+                    <span>@blob.Name</span>
+                    <button @onclick="@(() => DeleteBlobAsync(blob.Name))">Delete</button>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No existing files found in the blob.</p>
+    }
+
+@code
+{
+    private int maxAllowedFiles = 5;
+    private long maxSize = 1000000;  // allows up to 100 MB file upload
+    private BlobContainerClient container;
+    private List<BlobItem> blobs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var blobStorageConnectionString = "either enter here or in appsettings.json your blob storage connection string";
+        var blobStorageContainerName = "Enter the name of your blob storage container here";
+        
+        @* container = new BlobContainerClient(blobStorageConnectionString, blobStorageContainerName); *@
+
+        @* await LoadBlobsAsync(); *@
+    }
+
+    private async Task UploadFiles(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            try
+            {
+                var trustedFileName = Path.GetFileName(file.Name);
+                await container.UploadBlobAsync(trustedFileName, file.OpenReadStream(maxSize));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        await LoadBlobsAsync();
+    }
+
+    private async Task LoadBlobsAsync()
+    {
+        blobs = new List<BlobItem>();
+        await foreach (var blob in container.GetBlobsAsync())
+        {
+            blobs.Add(blob);
+        }
+    }
+
+    private async Task DeleteBlobAsync(string blobName)
+    {
+        await container.DeleteBlobIfExistsAsync(blobName);
+        await LoadBlobsAsync();
+    }
+}

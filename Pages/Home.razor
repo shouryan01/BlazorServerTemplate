@@ -1,0 +1,27 @@
+﻿@page "/home"
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider GetAuthenticatorKeyAsync
+
+<PageTitle>Home Page</PageTitle>
+<AuthorizeView>
+    <Authorized>
+        <h1>Dashboard</h1>
+        <a href="/swagger/index.html" target="_blank">You can use Swagger to see all available API endpoints</a>
+        <p>This makes documentation easy, and you can test the various endpoints right from the browser!</p>
+    </Authorized>
+</AuthorizeView>
+
+
+@code {
+    [CascadingParameter] protected Task<AuthenticationState>? AuthenticationState { get; set; }
+    
+    protected async override Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationState;
+        var user = authState.User;
+        if (!user.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("/Identity/Account/Login/", true);
+        }
+    }
+}

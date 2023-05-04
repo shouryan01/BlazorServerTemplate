@@ -1,0 +1,28 @@
+@page "/child-layout-example"
+
+<h1>Switch Child Components</h1>
+<p>
+  <label>
+      Select a Page:
+      <select @onchange="OnDropdownChange">
+          <option value="">Select a value</option>
+          <option value="@nameof(Page1)">Page 1</option>
+          <option value="@nameof(Page2)">Page 2</option>
+          <option value="@nameof(Page3)">Page 3</option>
+      </select>
+  </label>
+</p>
+
+@if (selectedType is not null)
+{
+  <DynamicComponent Type="@selectedType" />
+}
+
+@code {
+    private Type? selectedType;
+
+    private void OnDropdownChange(ChangeEventArgs e)
+    {
+        selectedType = Type.GetType($"BlazorServerTemplate.Pages.{e.Value}");
+    }
+}

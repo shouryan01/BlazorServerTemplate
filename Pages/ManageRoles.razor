@@ -1,0 +1,143 @@
+@page "/manage-roles"
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore;
+@using BlazorServerTemplate.Data;
+@inject RoleManager<IdentityRole> RoleManager
+@inject UserManager<BlazorUser> UserManager
+@inject NavigationManager NavigationManager
+
+<h1>All Roles</h1>
+@if (Roles != null && Roles.Any())
+{
+    <ul>
+        @foreach (var role in Roles)
+        {
+            <li>@role.Name</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No roles created yet.</p>
+}
+
+@if ((Roles != null && Roles.Any()) && (Users != null && Users.Any()))
+{
+    <h1>Assign Role</h1>
+    <form @onsubmit="AssignRole">
+        <select @bind="userId">
+            <option value="">Select a user</option>
+            @foreach (var user in Users)
+            {
+                <option value="@user.Id">@user.Email</option>
+            }
+        </select>
+        <select @bind="roleName">
+            <option value="">Select a role</option>
+            @foreach (var role in Roles)
+            {
+                <option value="@role.Name">@role.Name</option>
+            }
+        </select>
+        <button type="submit">Assign</button>
+    </form>
+}
+
+<h1>Create New Role</h1>
+@if (Result != null && Result.Succeeded)
+{
+    <p>The role was created successfully.</p>
+}
+else if (Result != null && Result.Errors.Any())
+{
+    <ul>
+        @foreach (var error in Result.Errors)
+        {
+            <li>@error.Description</li>
+        }
+    </ul>
+}
+<form @onsubmit="CreateRole">
+    <div>
+        <label for="roleName">Role Name:</label>
+        <input type="text" id="roleName" @bind="RoleName" />
+    </div>
+    <button type="submit">Create</button>
+</form>
+
+@if ((Roles != null && Roles.Any()) && (Users != null && Users.Any()))
+{
+    <h1>Delete Role</h1>
+<form @onsubmit="DeleteRole">
+    <div>
+        <label for="roleName">Role Name:</label>
+        <input type="text" id="roleName" @bind="RoleName" />
+    </div>
+    <button type="submit">Delete</button>
+</form>
+}
+
+@code {
+    private IEnumerable<IdentityRole>? Roles;
+    private List<BlazorUser>? Users;
+    private string? userId;
+    private string? roleName;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        Roles = await RoleManager.Roles.ToListAsync();
+        Users = await UserManager.Users.ToListAsync();
+    }
+
+    public async void AssignRole()
+    {
+        Console.WriteLine($"Assigning role {roleName} to user {userId}");
+        var user = await UserManager.FindByIdAsync(userId);
+        if (await UserManager.IsInRoleAsync(user, roleName))
+        {
+            Console.WriteLine($"User {userId} already has role {roleName}. No change required.");
+            return;
+        }
+
+        // Remove any existing roles
+        var roles = await UserManager.GetRolesAsync(user);
+        if (roles != null && roles.Any())
+        {
+            var removeResult = await UserManager.RemoveFromRolesAsync(user, roles);
+            if (!removeResult.Succeeded)
+            {
+                Console.WriteLine($"Failed to remove roles for user {userId}");
+                return;
+            }
+        }
+
+        // Add the new role
+        var addResult = await UserManager.AddToRoleAsync(user, roleName);
+        if (addResult.Succeeded)
+        {
+            Console.WriteLine($"Role {roleName} assigned to user {userId}");
+        }
+        else
+        {
+            Console.WriteLine($"Failed to assign role {roleName} to user {userId}");
+        }
+    }
+
+
+    private string? RoleName { get; set; }
+    private IdentityResult? Result { get; set; }
+
+    private async Task CreateRole()
+    {
+        var role = new IdentityRole { Name = RoleName };
+        Result = await RoleManager.CreateAsync(role);
+        NavigationManager.NavigateTo("/manage-roles", forceLoad: true);
+    }
+
+    private async Task DeleteRole()
+    {
+        var role = await RoleManager.FindByNameAsync(RoleName);
+        Result = await RoleManager.DeleteAsync(role);
+        NavigationManager.NavigateTo("/manage-roles", forceLoad: true);
+    }
+}

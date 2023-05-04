@@ -1,0 +1,64 @@
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@using BlazorServerTemplate.Data.Models
+
+<h3>Page 2</h3>
+<h5>This data is rendered in a table and is being pulled from the "Cars" table from the database.</h5>
+Change the text in the input fields and click "Edit" to edit the data in the database!
+
+@if (carsList != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Mileage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in carsList)
+            {
+                <tr>
+                    <td><input type="text" @bind="car.Year"></td>
+                    <td><input type="text" @bind="car.Manufacturer"></td>
+                    <td><input type="text" @bind="car.Name"></td>
+                    <td><input type="text" @bind="car.Color"></td>
+                    <td><input type="text" @bind="car.Mileage"></td>
+                    <td>
+                        <button class="btn btn-warning" @onclick="() => Edit(car)">Edit</button>
+                        <button class="btn btn-danger" @onclick="() => Delete(car.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h3>Go to Page 3 to submit data to the database.</h3>
+
+@code {
+    public List<Car> carsList = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        carsList = await HttpClient.GetFromJsonAsync<List<Car>>(NavigationManager.BaseUri + "api/v1/cars");
+            Console.WriteLine(carsList);
+    }
+
+    protected async Task Edit(Car c)
+    {
+        await HttpClient.PutAsJsonAsync(NavigationManager.BaseUri + "api/v1/cars/" + c.Id, c);
+        await JsRuntime.InvokeVoidAsync("alert", "Successfully Edited!");
+    }
+
+    protected async Task Delete(Guid id)
+    {
+        await HttpClient.DeleteAsync(NavigationManager.BaseUri + "api/v1/cars/" + id);
+        await JsRuntime.InvokeVoidAsync("alert", "Deleted! Refresh to see changes.");
+    }
+}
