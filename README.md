@@ -45,6 +45,7 @@ Here are setup instructions for login providers:
 - You will need to change the splash screen to something else of your choosing.
 - If you do not plan on using the external login providers, please comment them out in Program.cs
 - The custom user class is located in BlazorServerTemplate.Data and is titled BlazorUser. It includes additional fields such as Age and Address, which are both optional. When you register as a new user, you are prompted to enter your age. This is something else that you should customize as per the requirements of your app.
+- To change the registration fields and/or the fields in the account management page, you need to edit Index.cshtml and Index.cshtml.cs in Areas/Identity/Pages/Account/Manage and Register.cshtml and Register.cshtml.cs in Areas/Identity/Pages/Account
 - BlazorServerTemplate.Shared contains the NavMenu.razor file, which is how the sidebar links are rendered.
 - To find the files for the pages themselves, look in the BlazorServerTemplate.Pages folder.
 - You can visit "/swagger" to access swagger for your APIs.
@@ -58,7 +59,8 @@ Here are setup instructions for login providers:
 - "/manage-roles" shows you how to have role-based authorization. You can create, assign and delete roles from here. "/fetchdata" has an example of this in action.
 - Two factor authentication has been set up. Simply scan the QR code from the account page.
 - Areas/Identity contains the files from scaffolding identity.
-- To make a new mo
+- The Data folder contains the Controllers, Models, Migrations and Services folders as well as the ApplicationDbContext file.
+- Pages are in the "Pages" folder. "Shared" contains the layouts for pages.
 
 ## Screenshots
 
