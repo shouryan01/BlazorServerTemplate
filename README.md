@@ -5,7 +5,7 @@
 - Swagger UI configured for easy API documentation and testing.
 - Sample Model class and controllers are provided, all organized in appropriate folders.
 
-## Setup Instructions
+## Setup Instructionss
 
 
 [Setup Instructions](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-7.0)
