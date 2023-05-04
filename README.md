@@ -6,9 +6,11 @@
 - Sample Model class and controllers are provided, all organized in appropriate folders.
 
 ## Screenshots
-Dashboard
+
+### Dashboard
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/32345320/236243525-404bb84a-e7eb-41b8-aa00-1a5d9307ae1c.png">
-Swagger
+
+### Swagger
 <img width="1512" alt="Swagger UI" src="https://user-images.githubusercontent.com/32345320/236243073-e5987a36-dd5e-4429-9c60-9a7d42c1d35b.png">
 Counter and reactive elements
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/32345320/236243683-ba1b5801-424e-40ea-9a61-21a611fd3f70.png">
