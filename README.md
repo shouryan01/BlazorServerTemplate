@@ -36,7 +36,7 @@ dotnet user-secrets set "SendGridKey" "<key>"
 <img width="1510" alt="image" src="https://user-images.githubusercontent.com/32345320/236258391-5a5918d6-b1d5-43dd-bc54-a0667d3a39f7.png">
 
 ### Register Screen
-<img width="1510" alt="image" src="https://user-images.githubusercontent.com/32345320/236258546-2e2e85fa-304f-4c1c-a05c-a53aca4e09e0.png">
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/32345320/236258663-fae36d52-1579-41fd-82b1-d52f50aac18f.png">
 
 ### Dashboard
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/32345320/236243525-404bb84a-e7eb-41b8-aa00-1a5d9307ae1c.png">
