@@ -2,10 +2,18 @@
 
 ## Features
 
-- Swagger UI configured for easy API documentation and testing.
-- Sample Model class and controllers are provided, all organized in appropriate folders.
+- Animated Splash Screen
+- Third-party service to log in (Facebook, Twitter, Google, Microsoft)
+- Email Verification Service
+- Auto-navigate to sign in/log in page if not authenticated from home screen
+- Swagger UI configured for easy API documentation and testing
+- Counter and reactive variable
+- Nested child layouts with conditional output component
+- Sample Model class and controllers (GET, POST, PUT, DELETE) are provided, all organized in appropriate folders and corresponding UI element
+- File upload to blob storage is configured
+- Role-based authorization is provdided with a GUI implementation to manage roles
 
-## Setup Instructionss
+## Setup Instructions
 
 
 [Setup Instructions](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-7.0)
