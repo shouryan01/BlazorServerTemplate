@@ -15,6 +15,8 @@
 
 ## Setup Instructions
 
+- [Download and install .NET framework](https://dotnet.microsoft.com/en-us/download)
+
 
 [Setup Instructions](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-7.0)
 dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
