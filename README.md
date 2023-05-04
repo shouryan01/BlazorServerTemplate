@@ -17,21 +17,6 @@
 
 - [Download and install .NET framework](https://dotnet.microsoft.com/en-us/download). This will also install the .NET Cli.
 - To run the development server enter "dotnet watch" in the terminal. This option is for cross-platform development using VS Code. Alternatively, you can also click the .sln file included to open the project in Visual Studio. This also works for both Mac and Windows but the preferred method for cross-platform development is VS Code with the .NET Cli.
-- You will need to rename the project from BlazorServerTemplate to one of your own choosing. You can easily do this by using the built-in tool to refactor all occurances of a symbol. Make sure this also updates the namespaces of all the files as well.
-- You will need to change the splash screen to something else of your choosing.
-- If you do not plan on using the external login providers, please comment them out in Program.cs
-- The custom user class is located in BlazorServerTemplate.Data and is titled BlazorUser. It includes additional fields such as Age and Address, which are both optional. When you register as a new user, you are prompted to enter your age. This is something else that you should customize as per the requirements of your app.
-- BlazorServerTemplate.Shared contains the NavMenu.razor file, which is how the sidebar links are rendered.
-- To find the files for the pages themselves, look in the BlazorServerTemplate.Pages folder.
-- You can visit "/swagger" to access swagger for your APIs.
-- "/counter" will show you how to use reactive elements and variables
-- "child-layout-example" will show you how to use child elements and conditionally rendered outlets
-    - Page 1 will show you how to use for loops in HTML
-    - Page 2 will show you how to fetch data from the database and render it in a table, along with edit and delete functionalities.
-    - Page 3 will allow you to POST data to the database.
-- "/upload-to-blob-storage" shows you a demo of how you can upload files to blob storage. Of course, you will need to supply it with your own blob storage connection string.
-- Speaking of which, to change database providers from SqlLite to use SqlServer, just provide the connection string in appsettings.json and uncomment the lines from Program.cs
-- "/manage-roles" shows you how to have role-based authorization. You can create, assign and delete roles from here. "/fetchdata" has an example of this in action.
 
 Here are setup instructions for login providers:
 
@@ -53,6 +38,27 @@ Here are setup instructions for login providers:
 
 - [Twilio Sendgrid Instructions](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/accconfirm?view=aspnetcore-7.0&tabs=visual-studio).
     - dotnet user-secrets set "SendGridKey" "key"
+
+## Project Instructions 
+
+- You will need to rename the project from BlazorServerTemplate to one of your own choosing. You can easily do this by using the built-in tool to refactor all occurances of a symbol. Make sure this also updates the namespaces of all the files as well.
+- You will need to change the splash screen to something else of your choosing.
+- If you do not plan on using the external login providers, please comment them out in Program.cs
+- The custom user class is located in BlazorServerTemplate.Data and is titled BlazorUser. It includes additional fields such as Age and Address, which are both optional. When you register as a new user, you are prompted to enter your age. This is something else that you should customize as per the requirements of your app.
+- BlazorServerTemplate.Shared contains the NavMenu.razor file, which is how the sidebar links are rendered.
+- To find the files for the pages themselves, look in the BlazorServerTemplate.Pages folder.
+- You can visit "/swagger" to access swagger for your APIs.
+- "/counter" will show you how to use reactive elements and variables
+- "child-layout-example" will show you how to use child elements and conditionally rendered outlets
+    - Page 1 will show you how to use for loops in HTML
+    - Page 2 will show you how to fetch data from the database and render it in a table, along with edit and delete functionalities.
+    - Page 3 will allow you to POST data to the database.
+- "/upload-to-blob-storage" shows you a demo of how you can upload files to blob storage. Of course, you will need to supply it with your own blob storage connection string.
+- Speaking of which, to change database providers from SqlLite to use SqlServer, just provide the connection string in appsettings.json and uncomment the lines from Program.cs
+- "/manage-roles" shows you how to have role-based authorization. You can create, assign and delete roles from here. "/fetchdata" has an example of this in action.
+- Two factor authentication has been set up. Simply scan the QR code from the account page.
+- Areas/Identity contains the files from scaffolding identity.
+- To make a new mo
 
 ## Screenshots
 
