@@ -17,6 +17,14 @@
 
 - [Download and install .NET framework](https://dotnet.microsoft.com/en-us/download). This will also install the .NET Cli.
 - To run the development server enter "dotnet watch" in the terminal. This option is for cross-platform development using VS Code. Alternatively, you can also click the .sln file included to open the project in Visual Studio. This also works for both Mac and Windows but the preferred method for cross-platform development is VS Code with the .NET Cli.
+- You will need to rename the project from BlazorServerTemplate to one of your own choosing. You can easily do this by using the built-in tool to refactor all occurances of a symbol. Make sure this also updates the namespaces of all the files as well.
+- You will need to change the splash screen to something else of your choosing.
+- If you do not plan on using the external login providers, please comment them out in Program.cs
+- The custom user class is located in BlazorServerTemplate.Data and is titled BlazorUser. It includes additional fields such as Age and Address, which are both optional. When you register as a new user, you are prompted to enter your age. This is something else that you should customize as per the requirements of your app.
+- BlazorServerTemplate.Shared contains the NavMenu.razor file, which is how the sidebar links are rendered.
+- To find the files for the pages themselves, look in the BlazorServerTemplate.Pages folder.
+- You can visit http://localhost:<portnumber>/swagger/index.html to access swagger for your APIs.
+-
 
 Here are setup instructions for login providers:
 
