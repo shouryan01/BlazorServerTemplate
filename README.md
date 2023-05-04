@@ -15,9 +15,10 @@
 
 ## Setup Instructions
 
-- [Download and install .NET framework](https://dotnet.microsoft.com/en-us/download)
+- [Download and install .NET framework](https://dotnet.microsoft.com/en-us/download). This will also install the .NET Cli.
+- To run the development server enter "dotnet watch" in the terminal. This option is for cross-platform development using VS Code. Alternatively, you can also click the .sln file included to open the project in Visual Studio. This also works for both Mac and Windows but the preferred method for cross-platform development is VS Code with the .NET Cli.
 
-
+Here are setup instructions for login providers:
 [Setup Instructions](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-7.0)
 dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
 dotnet user-secrets set "Authentication:Google:ClientSecret" "<client-secret>"
